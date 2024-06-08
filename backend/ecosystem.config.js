@@ -10,7 +10,7 @@ const {
 module.exports = {
   apps: [{
     name: 'api-service',
-    script: './dist/app.js',
+    script: './current/backend/dist/app.js',
   }],
 
   deploy: {
@@ -18,10 +18,10 @@ module.exports = {
       user: DEPLOY_USER,
       host: DEPLOY_HOST,
       ref: DEPLOY_REF,
-      repo: 'https://github.com/ituzov/nodejs-pm2-deploy.git',
+      repo: 'git@github.com:Anchas/nodejs-mesto-project.git',
       path: DEPLOY_PATH,
-      'post-deploy': ` cd ${DEPLOY_PATH}/current/backend && . ~/.bashrc && npm install && npm run build && pm2 startOrRestart ecosystem.config.js && pm2 save`,
-
+      'pre-deploy-local': `scp .env ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}`,
+      'post-deploy': `export PATH=$PATH:~/.nvm/versions/node/v14.21.3/bin/ && cd ${DEPLOY_PATH}/current/backend && npm install && npm run build && pm2 startOrRestart ecosystem.config.js && pm2 save`,
     },
   },
 };
