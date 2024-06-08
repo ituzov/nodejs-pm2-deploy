@@ -20,6 +20,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: 'https://github.com/ituzov/nodejs-pm2-deploy.git',
       path: DEPLOY_PATH,
+      'pre-deploy': `scp ./*.env ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}`,
       'post-deploy': `cd ${DEPLOY_PATH}/current/backend && npm i && npm run build`,
     },
   },
