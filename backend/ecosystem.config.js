@@ -10,7 +10,7 @@ const {
 module.exports = {
   apps: [{
     name: 'api-service',
-    script: './current/backend/dist/app.js',
+    script: './dist/app.js',
   }],
 
   deploy: {
@@ -20,8 +20,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: 'https://github.com/ituzov/nodejs-pm2-deploy.git',
       path: DEPLOY_PATH,
-      'pre-deploy': `echo "Starting pre-deploy"`,
-      'post-deploy': `echo "Starting post-deploy" && cd ${DEPLOY_PATH}/current/backend && npm install && npm run build && pm2 startOrRestart api-service --update-env && pm2 save`,
+      'post-deploy': `cd ${DEPLOY_PATH}/current/backend && npm install && npm run build`,
     },
   },
 };
