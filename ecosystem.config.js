@@ -31,7 +31,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: 'https://github.com/ituzov/nodejs-pm2-deploy.git',
       path: DEPLOY_PATH_BACKEND,
-      'pre-deploy': `scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no .env.deploy ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH_BACKEND}`,
+      'pre-deploy': `scp -i /c/Users/ituzov/.ssh/id_rsa -o StrictHostKeyChecking=no .env.deploy ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH_BACKEND}`,
       'post-deploy': 'cd backend && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
     },
     frontend: {
@@ -40,7 +40,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: 'https://github.com/ituzov/nodejs-pm2-deploy.git',
       path: DEPLOY_PATH_FRONTEND,
-      'pre-deploy': `scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no .env.deploy ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH_FRONTEND}`,
+      'pre-deploy': `scp -i /c/Users/ituzov/.ssh/id_rsa -o StrictHostKeyChecking=no .env.deploy ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH_FRONTEND}`,
       'post-deploy': `cd frontend && npm install && npm run build && cp -r build/* ${DEPLOY_PATH_FRONTEND}`,
     },
   },
