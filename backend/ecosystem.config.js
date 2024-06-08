@@ -26,8 +26,10 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: 'https://github.com/ituzov/nodejs-pm2-deploy.git',
       path: DEPLOY_PATH,
+      'pre-setup': `ssh -i /c/Users/ituzov/.ssh/id_rsa -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_HOST} 'rm -rf ${DEPLOY_PATH}/current'`,
+      'post-setup': `echo "Setup completed"`,
       'pre-deploy': `echo "Starting pre-deploy" && ls -la /c/Users/ituzov/.ssh && scp -i /c/Users/ituzov/.ssh/id_rsa -o StrictHostKeyChecking=no .env ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/current/.env`,
-      'post-deploy': `echo "Starting post-deploy" && cd ${DEPLOY_PATH}/current/backend && npm install && npm run build && pm2 startOrRestart ${DEPLOY_PATH}/current/backend/ecosystem.config.js --env production && pm2 save`,
+      'post-deploy': `echo "Starting post-deploy" && cd ${DEPLOY_PATH}/current/backend && npm install && npm run build && pm2 save`,
     },
   },
 };
