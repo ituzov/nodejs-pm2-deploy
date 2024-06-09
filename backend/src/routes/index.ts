@@ -13,6 +13,11 @@ import { validateUserBody, validateAuthentication } from '../middlewares/validat
 const router = Router();
 router.post('/signup', validateUserBody, createUser);
 router.post('/signin', validateAuthentication, login);
+router.get('/crash-test', (req, res) => {
+  res.send('Server will crash now...');
+  // Принудительный крах сервера
+  process.exit(1);
+});
 
 
 // все роуты, кроме /signin и /signup, защищены авторизацией;
